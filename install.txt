@@ -1,0 +1,1 @@
+npm install @nextui-org/react moment axios react-redux react-toastify @reduxjs/toolkit redux tailwindcss postcss autoprefixer

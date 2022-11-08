@@ -1,0 +1,20 @@
+@import 'tailwindcss/components';
+
+@layer components {
+    .btn_toggle {
+        @apply inline-flex items-center 
+        justify-center gap-2 p-2 text-sm 
+        font-medium text-gray-700
+        align-middle transition-all 
+      bg-white border rounded-md shadow-sm
+      hover:bg-gray-50
+        focus:outline-none focus:ring-2 focus:ring-offset-2
+        focus:ring-offset-white focus:ring-blue-600
+        dark:bg-gray-800 dark:hover:bg-slate-800
+        dark:border-gray-700 dark:text-gray-400
+        dark:hover:text-white dark:focus:ring-offset-gray-800;
+    }
+    .btn {
+        width: 100px;
+    }
+}

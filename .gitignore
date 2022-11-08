@@ -1,0 +1,7 @@
+backend/.env
+frontend/.env
+.env
+.txt
+.DS_Store
+._.DS_Store
+*.env
