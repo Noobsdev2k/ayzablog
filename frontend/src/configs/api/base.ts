@@ -19,4 +19,16 @@ HTTPS.interceptors.request.use(
     },
 );
 
+HTTPS.interceptors.response.use(
+    (response: AxiosResponse) => {
+        if (response && response.data) {
+            return response.data;
+        }
+        return response;
+    },
+    (error: string) => {
+        throw error;
+    },
+);
+
 export default HTTPS;
