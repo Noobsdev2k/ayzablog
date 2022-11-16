@@ -87,3 +87,28 @@ export const googleSignIn = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getProfile = async (req, res) => {
+  try {
+    const { userId } = req;
+    const account = await UserModal.findById(userId);
+    if (!account) return res.status(400).json({ message: "no found account" });
+    const user = {
+      id: account._id,
+      userName: account.user_name,
+      email: account.email,
+    };
+
+    const token = jwt.sign(user, ACCESS_TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({
+      token,
+      data: account,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+    console.log(error);
+  }
+};
