@@ -16,7 +16,7 @@ export const createBlog = async (req, res) => {
   const blog = JSON.parse(req.body.data);
 
   const imageFile = req.files["imageFile"][0];
-  console.log(imageFile);
+
   const resultImage = await cloudinary.v2.uploader.upload(imageFile.path, {
     folder: "imageFile",
   });
@@ -40,6 +40,7 @@ export const createBlog = async (req, res) => {
 
 export const getBlogs = async (req, res) => {
   const { page } = req.query;
+
   try {
     // const blogs = await BlogModal.find();
     // res.status(200).json(blogs);
@@ -61,6 +62,7 @@ export const getBlogs = async (req, res) => {
 
 export const getBlog = async (req, res) => {
   const { id } = req.params;
+
   try {
     const blog = await BlogModal.findById(id);
     res.status(200).json(blog);
@@ -71,6 +73,7 @@ export const getBlog = async (req, res) => {
 
 export const getBlogsByUser = async (req, res) => {
   const { id } = req.params;
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ message: "User doesn't exist" });
   }

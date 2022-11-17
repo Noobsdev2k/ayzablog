@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
-const moment = require("moment");
+import mongoose from "mongoose";
+import moment from "moment";
 const create = moment().format();
 
 const CommentSchema = mongoose.Schema({
-  id_blog: { type: String, require: true },
+  blogId: { type: String, require: true },
   comments: {
     type: Array,
     default: [
       {
-        commentId: { type: Number, required: true },
-        id_account: { type: String, required: true },
-        account: { type: Object, default: {} },
+        commentId: mongoose.Types.ObjectId,
+        userId: { type: String, required: true },
+        user: { type: Object, default: {} },
         body: { type: String, default: "" },
       },
     ],
@@ -21,4 +21,5 @@ const CommentSchema = mongoose.Schema({
   updatedAt: { type: Date, default: create },
 });
 
-module.exports = mongoose.model("Comment", CommentSchema);
+const CommentModal = mongoose.model("Comment", CommentSchema);
+export default CommentModal;

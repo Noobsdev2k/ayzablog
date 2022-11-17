@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import userRouter from "./routes/user.routes.js";
 import blogRouter from "./routes/blog.routes.js";
+import commentRouter from "./routes/comment.routes.js";
 import dotenv from "dotenv";
 
 const app = express();
@@ -16,8 +17,9 @@ app.use(cors());
 
 app.use("/users", userRouter); // http://localhost:5000/users/signup
 app.use("/blog", blogRouter);
+app.use("/comment", commentRouter);
 app.get("/", (req, res) => {
-  res.send("Welcome to tour API");
+  res.send("Welcome to blog API");
 });
 
 const port = process.env.PORT || 8888;
