@@ -1,4 +1,4 @@
-interface Tour {
+interface Blog {
     data: Data[];
     currentPage?: any;
     totalBlogs: number;
@@ -18,4 +18,4 @@ interface Data {
     __v: number;
 }
 
-export type { Tour, Data };
+export type { Blog, Data };
