@@ -1,13 +1,20 @@
 import type { AppProps } from 'next/app';
-import Layouts from '../core/components/layouts';
+
 import '../utils/assets/styles/globals.css';
 import { NextUIProvider } from '@nextui-org/react';
 import { Provider } from 'react-redux';
+
 import { store } from '@/configs/store/store';
 import { darkTheme, lightTheme } from '@/configs/themes';
 import { ThemeProvider } from 'next-themes';
+import { Page } from '@/core/interfaces/page';
 
-export default function App({ Component, pageProps }: AppProps) {
+type Props = AppProps & {
+    Component: Page;
+};
+
+export default function App({ Component, pageProps }: Props) {
+    const getLayout = Component.getLayout || ((page) => page);
     return (
         <Provider store={store}>
             <ThemeProvider
@@ -18,11 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     dark: darkTheme.className,
                 }}
             >
-                <NextUIProvider>
-                    <Layouts>
-                        <Component {...pageProps} />
-                    </Layouts>
-                </NextUIProvider>
+                <NextUIProvider>{getLayout(<Component {...pageProps} />)}</NextUIProvider>
             </ThemeProvider>
         </Provider>
     );

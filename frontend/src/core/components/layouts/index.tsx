@@ -7,7 +7,7 @@ interface Props {
 export default function Layouts({ children }: Props) {
     return (
         <>
-            <header className="z-50 flex flex-wrap w-full py-4 text-sm bg-white sm:justify-start sm:flex-nowrap dark:bg-gray-800">
+            <header className="z-50 flex flex-wrap w-full text-sm sm:justify-start sm:flex-nowrap ">
                 <Navbar />
             </header>
 
