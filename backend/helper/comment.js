@@ -49,3 +49,26 @@ export const listPaging = async ({ blogId, page, pagesize = 1 }) => {
     console.error(error);
   }
 };
+
+export const update = async ({
+  commentId,
+  userId,
+
+  body,
+}) => {
+  try {
+    return await CommentModal.findOneAndUpdate(
+      {
+        comments: { $elemMatch: { commentId: commentId, userId: userId } },
+      },
+      {
+        $set: {
+          "comments.$.body": body,
+        },
+      },
+      { upsert: true, returnDocument: "after" }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};

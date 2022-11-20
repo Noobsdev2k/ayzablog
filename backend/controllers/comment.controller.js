@@ -1,4 +1,4 @@
-import { insertComment, listPaging } from "../helper/comment.js";
+import { insertComment, listPaging, update } from "../helper/comment.js";
 import UserModal from "../models/user.model.js";
 import CommentModal from "../models/comment.model.js";
 export const createComment = async (req, res) => {
@@ -13,11 +13,11 @@ export const createComment = async (req, res) => {
       role: 0,
     });
 
-    const { blogId, body } = req.body;
-    console.log(userId);
+    const { blogId, body, commentId } = req.body;
+
     return res
       .status(201)
-      .json(await insertComment({ blogId, body, userId, user }));
+      .json(await insertComment({ blogId, body, userId, user, commentId }));
   } catch (error) {
     res.status(404).json({ message: "Something went wrong" });
   }
@@ -39,6 +39,21 @@ export const getByBlog = async (req, res, next) => {
         count: listComments[0].count,
         totalPages: total.length,
       },
+    });
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};
+export const updateComment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req;
+    const { body } = req.body;
+    const commentId = id;
+    const comment = await update({ body, userId, commentId });
+    return res.status(200).json({
+      status: "Update success",
+      result: comment,
     });
   } catch (error) {
     res.status(404).json({ message: "Something went wrong" });
